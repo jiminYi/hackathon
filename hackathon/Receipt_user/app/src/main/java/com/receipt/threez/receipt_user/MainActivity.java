@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         this.menu = menu;
         menu.add(MENU_REPRESH, MENU_REPRESH + 1, Menu.NONE, "새로고침").setIcon(getResources().getDrawable(R.drawable.ic_cached_black_24dp));
+        menu.getItem(0).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_receipt) {
             newFragment = ReceiptFragment.newInstance();
             menu.add(MENU_REPRESH, MENU_REPRESH + 1, Menu.NONE, "새로고침").setIcon(getResources().getDrawable(R.drawable.ic_cached_black_24dp));
+            menu.getItem(0).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         } else if (id == R.id.nav_consumption_report) {
             newFragment = ConsumptionReportFragment.newInstance();
             menu.removeItem(MENU_REPRESH + 1);
