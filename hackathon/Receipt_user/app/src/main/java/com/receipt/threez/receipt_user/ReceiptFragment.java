@@ -56,7 +56,8 @@ public class ReceiptFragment extends Fragment {
         /*test*/
         List<Item> items = new ArrayList<Item>();
         items.add(new Item("떡볶이", "분식", 3000, 1));
-        receipts.add(new Receipt("달복이", "2016/06/27", "18:17:57", "서울특별시 용산구 청파로47길 88", items, "5107-****-****-****", "신한카드", "123456", "일시불"));
+        items.add(new Item("순대", "분식", 3000, 1));
+        receipts.add(new Receipt("달볶이", "서울특별시 용산구 청파로47길 88", "5107-****-****-****", "신한카드", "2016/06/27", "18:17:57", items));
         /*test*/
     }
 

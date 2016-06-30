@@ -1,30 +1,30 @@
 package com.receipt.threez.receipt_user.data;
 
 public class Item {
-    private String name;
-    private String category;
-    private int unitPrice;
+    private String productName;
+    private int productPrice;
+    private String productCategory;
     private int amount;
     private int price;
 
-    public Item(String name, String category, int unitPrice, int amount) {
-        this.name = name;
-        this.category = category;
-        this.unitPrice = unitPrice;
+    public Item(String productName, String productCategory, int productPrice, int amount) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productCategory = productCategory;
         this.amount = amount;
-        this.price = unitPrice * amount;
+        this.price = productPrice * amount;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public String getCategory() {
-        return category;
+    public String getProductCategory() {
+        return productCategory;
     }
 
-    public int getUnitPrice() {
-        return unitPrice;
+    public int getProductPrice() {
+        return productPrice;
     }
 
     public int getAmount() {

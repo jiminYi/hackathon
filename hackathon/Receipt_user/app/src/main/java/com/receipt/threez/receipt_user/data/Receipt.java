@@ -3,28 +3,35 @@ package com.receipt.threez.receipt_user.data;
 import java.util.*;
 
 public class Receipt {
-    private String company;
-    private String date;
-    private String time;
-    private String addr;
-    private List<Item> items;
-    private int totalPrice;
+    private String storeName;
+    private String storeAddr;
     private String cardNumber;
     private String cardCompany;
-    private String approvalNumber;
-    private String installment;
+    private String date;
+    private String time;
+    private List<Item> items;
+    private int totalPrice;
 
-    public Receipt(String company, String date, String time, String addr, List<Item> items,
-                   String cardNumber, String cardCompany, String approvalNumber, String installment) {
-        this.company = company;
-        this.date = date;
-        this.time = time;
-        this.addr = addr;
-        this.items = items;
+    public Receipt(String storeName, String storeAddr,  String cardNumber, String cardCompany,
+                   String date, String time, List<Item> items) {
+        this.storeName = storeName;
+        this.storeAddr = storeAddr;
         this.cardNumber = cardNumber;
         this.cardCompany = cardCompany;
-        this.approvalNumber = approvalNumber;
-        this.installment = installment;
+        this.date = date;
+        this.time = time;
+        this.items = items;
+        setTotalPrice();
+    }
+
+    public Receipt(String storeName, String storeAddr,  String cardNumber, String cardCompany,
+                   String date, String time) {
+        this.storeName = storeName;
+        this.storeAddr = storeAddr;
+        this.cardNumber = cardNumber;
+        this.cardCompany = cardCompany;
+        this.date = date;
+        this.time = time;
         setTotalPrice();
     }
 
@@ -35,8 +42,8 @@ public class Receipt {
         }
     }
 
-    public String getCompany() {
-        return company;
+    public String getStoreName() {
+        return storeName;
     }
 
     public String getDate() {
@@ -47,12 +54,16 @@ public class Receipt {
         return time;
     }
 
-    public String getAddr() {
-        return addr;
+    public String getStoreAddr() {
+        return storeAddr;
     }
 
     public List<Item> getItems() {
         return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     public int getTotalPrice() {
@@ -65,13 +76,5 @@ public class Receipt {
 
     public String getCardCompany() {
         return cardCompany;
-    }
-
-    public String getApprovalNumber() {
-        return approvalNumber;
-    }
-
-    public String getInstallment() {
-        return installment;
     }
 }

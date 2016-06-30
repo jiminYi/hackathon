@@ -54,7 +54,7 @@ public class ReceiptListAdapter extends BaseAdapter {
             viewHolder = (ReceiptListHolder) convertView.getTag();
         }
         final Receipt receipt = receipts.get(position);
-        viewHolder.company.setText(receipt.getCompany());
+        viewHolder.company.setText(receipt.getStoreName());
         viewHolder.date.setText(receipt.getDate());
         viewHolder.time.setText(receipt.getTime());
         viewHolder.cardCompany.setText(receipt.getCardCompany());

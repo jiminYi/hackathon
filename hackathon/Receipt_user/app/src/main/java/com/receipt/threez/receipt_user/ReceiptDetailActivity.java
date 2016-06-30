@@ -19,8 +19,6 @@ public class ReceiptDetailActivity extends AppCompatActivity {
     private TextView totalPrice;
     private TextView cardNumber;
     private TextView cardCompany;
-    private TextView approvalNumber;
-    private TextView installment;
     private TableLayout itemTable;
 
     @Override
@@ -37,8 +35,6 @@ public class ReceiptDetailActivity extends AppCompatActivity {
         totalPrice = (TextView) findViewById(R.id.receipt_detail_total_price);
         cardNumber = (TextView) findViewById(R.id.receipt_detail_card_number);
         cardCompany = (TextView) findViewById(R.id.receipt_detail_card_company);
-        approvalNumber = (TextView) findViewById(R.id.receipt_detail_approval_number);
-        installment = (TextView) findViewById(R.id.receipt_detail_installment);
         itemTable = (TableLayout) findViewById(R.id.receipt_detail_table_item);
 
         Intent intent = getIntent();
@@ -50,21 +46,19 @@ public class ReceiptDetailActivity extends AppCompatActivity {
     }
 
     private void setReceiptDetail() {
-        company.setText(receipt.getCompany());
-        addr.setText(receipt.getAddr());
+        company.setText(receipt.getStoreName());
+        addr.setText(receipt.getStoreAddr());
         date.setText(receipt.getDate());
         time.setText(receipt.getTime());
         totalPrice.setText(receipt.getTotalPrice() + "");
         cardNumber.setText(receipt.getCardNumber());
         cardCompany.setText(receipt.getCardCompany());
-        approvalNumber.setText(receipt.getApprovalNumber());
-        installment.setText(receipt.getInstallment());
         setItems();
     }
 
     private void setItems() {
         for(Item item : receipt.getItems()) {
-            addRow(item.getName(), item.getUnitPrice() + "", item.getAmount() + "", item.getPrice() + "");
+            addRow(item.getProductName(), item.getProductPrice() + "", item.getAmount() + "", item.getPrice() + "");
         }
     }
 
