@@ -10,10 +10,10 @@ request.setCharacterEncoding("utf-8");
 String id = request.getParameter("id");
 String pwd = request.getParameter("pwd");
 
-StoreList user = new StoreList();
+StoreList store = new StoreList();
 
-user.setId(id);
-user.setPwd(pwd);
+store.setId(id);
+store.setPwd(pwd);
 
 
 try {
@@ -24,7 +24,7 @@ try {
 
 	Connection con =  DriverManager.getConnection(DB_URL, "admin", "1234");
 	
-	String sql = "SELECT *FROM user_list WHERE id=?";
+	String sql = "SELECT *FROM store WHERE id=?";
 	
 	PreparedStatement pstmt = con.prepareStatement(sql);
 	
@@ -40,11 +40,11 @@ try {
 
 			HttpSession session = request.getSession(true);
 			
-			session.setAttribute("login.useridx", rs.getString("useridx"));
+			session.setAttribute("login.store_id", rs.getString("store_id"));
 			session.setAttribute("login.id", id);
 			session.setAttribute("login.pwd", pwd);
-			session.setAttribute("login.username", rs.getString("username"));
-			session.setAttribute("login.useraddress", rs.getString("useraddress"));
+			session.setAttribute("login.store_name", rs.getString("store_name"));
+			session.setAttribute("login.store_address", rs.getString("store_address"));
 			
 			rs.close();
 			pstmt.close();

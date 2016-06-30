@@ -8,11 +8,11 @@
 			return;
 	}
 
-	String useridx = (String)session.getAttribute("login.useridx");
+	String store_id = (String)session.getAttribute("login.store_id");
 	String id = (String)session.getAttribute("login.id");
 	String pwd = (String)session.getAttribute("login.pwd");
-	String username = (String)session.getAttribute("login.username");
-	String useraddress = (String)session.getAttribute("login.useraddress");
+	String store_name = (String)session.getAttribute("login.store_name");
+	String store_address = (String)session.getAttribute("login.store_address");
 
 %>
 <%
@@ -30,11 +30,10 @@ try {
 
     stmt = con.createStatement(); 
 
-    String query = "SELECT * FROM product_list WHERE useridx="+useridx; 
-    
+    String query = "SELECT * FROM product WHERE store_id="+store_id; 
+
     rs = stmt.executeQuery(query);
    
-
 %>
 
 
@@ -49,19 +48,19 @@ try {
 
 function chk_blank() {
 	
-	   if(document.product_form.productname.value=="") {
+	   if(document.product_form.product_name.value=="") {
 			alert("상품명을 입력하세요");	
 			return false;
 			
 		} 
 	   
-	   if(document.product_form.productprice.value=="") {
+	   if(document.product_form.product_price.value=="") {
 			alert("가격을 입력하세요");	
 			return false;
 			
 		} 
 	   
-	   if(document.product_form.productcategory.value=="") {
+	   if(document.product_form.product_category.value=="") {
 			alert("상품분류를 입력하세요");	
 			return false;
 			
@@ -103,10 +102,10 @@ function chk_blank() {
 						<h2 style="color:yellow;">신규품목 등록</h2><span></span>
 						<div>
 						<form name="product_form" action="product_save_do.jsp" method="get">
-							<strong>상품명</strong><input type="text" name="productname" size="12"><span>|</span>
-							<strong>가격</strong><input type="number" name="productprice" min="0" step="1"><span>&#8361;|</span>
-							<strong>분류</strong><input type="text" name="productcategory" size="12"><span>|</span>
-							<input type="text" name="useridx" value="<%=useridx %>" style="display: none; ">
+							<strong>상품명</strong><input type="text" name="product_name" size="12"><span>|</span>
+							<strong>가격</strong><input type="number" name="product_price" min="0" step="1"><span>&#8361;|</span>
+							<strong>분류</strong><input type="text" name="product_category" size="12"><span>|</span>
+							<input type="text" name="store_id" value="<%=store_id %>" style="display: none; ">
 							
 							<input type="submit" value="등록" onclick="return chk_blank()">
 						</form>
@@ -120,11 +119,11 @@ function chk_blank() {
    							while(rs.next()) {
 							%>
 							<tr>
-								<td>상품명 : <%=rs.getString("productname") %></td>
-								<td>가격 : <%= rs.getInt("productprice")%></td>
-								<td>분류 : <%=rs.getString("productcategory") %></td>
-								<td><input type="button" value="삭제" onClick="location.href='product_delete.jsp?productidx=<%= rs.getInt("productidx")%>'"></td>
-								<td><input type="button" value="수정" onClick="window.open('product_modify.jsp?productidx=<%= rs.getInt("productidx")%>','_blank()',
+								<td>상품명 : <%=rs.getString("product_name") %></td>
+								<td>가격 : <%= rs.getInt("product_price")%></td>
+								<td>분류 : <%=rs.getString("product_category") %></td>
+								<td><input type="button" value="삭제" onClick="location.href='product_delete.jsp?product_id=<%= rs.getInt("product_id")%>'"></td>
+								<td><input type="button" value="수정" onClick="window.open('product_modify.jsp?product_id=<%= rs.getInt("product_id")%>','_blank()',
 										'width=300,height=400,scrollbars=no,menubar=no,resizable=no')"></td>
 							</tr>
 							<%
@@ -165,12 +164,12 @@ function chk_blank() {
 							비밀번호: <%=pwd %>
 						</div>
 						<div class="login_box">
-							<label for="login_pwd" class="login_label">매장명</label>
-							매장명: <%=username %>
+							<label for="store_name" class="login_label">매장명</label>
+							매장명: <%=store_name %>
 						</div>
 						<div class="login_box">
-							<label for="login_pwd" class="login_label">주소</label>
-							주소: <%=useraddress %>
+							<label for="store_address" class="login_label">주소</label>
+							주소: <%=store_address %>
 						</div>						
 								
 						<form name="login_form" action="login.jsp">						

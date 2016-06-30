@@ -3,10 +3,10 @@
 <%
 request.setCharacterEncoding("utf-8");
 
-String productidx = request.getParameter("productidx");
-String productname = request.getParameter("productname");
-String productprice = request.getParameter("productprice");
-String productcategory = request.getParameter("productcategory");
+String product_id = request.getParameter("product_id");
+String product_name = request.getParameter("product_name");
+String product_price = request.getParameter("product_price");
+String product_category = request.getParameter("product_category");
 
 try {
 	Class.forName("com.mysql.jdbc.Driver"); 
@@ -15,15 +15,15 @@ try {
 	Connection con =  DriverManager.getConnection(DB_URL, "admin", "1234");
 	
 	
-	String sql = "UPDATE product_list SET productname=?,productprice=?,productcategory=? WHERE productidx=?";
+	String sql = "UPDATE product SET product_name=?,product_price=?,product_category=? WHERE product_id=?";
 	
 	PreparedStatement pstmt = con.prepareStatement(sql);
 	
 	 
-	pstmt.setString(1, productname);
-	pstmt.setString(2, productprice);
-	pstmt.setString(3, productcategory);
-	pstmt.setString(4, productidx);
+	pstmt.setString(1, product_name);
+	pstmt.setString(2, product_price);
+	pstmt.setString(3, product_category);
+	pstmt.setString(4, product_id);
 
 	pstmt.executeUpdate();
 

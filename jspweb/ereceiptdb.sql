@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `product`
+--
+
+DROP TABLE IF EXISTS `product`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `product` (
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL,
+  `product_name` varchar(50) NOT NULL,
+  `product_price` int(11) NOT NULL,
+  `product_category` varchar(50) NOT NULL,
+  PRIMARY KEY (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product`
+--
+
+LOCK TABLES `product` WRITE;
+/*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` VALUES (1,2,'치즈버거',2300,'버거'),(2,2,'불고기버거',3400,'버거'),(3,2,'새우버거',4500,'버거'),(4,3,'치즈버거',2700,'버거'),(5,3,'맥더블',3900,'버거');
+/*!40000 ALTER TABLE `product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `product_list`
 --
 
@@ -43,6 +70,33 @@ INSERT INTO `product_list` VALUES (2,2,'치즈버거',2300,'버거'),(4,2,'불�
 UNLOCK TABLES;
 
 --
+-- Table structure for table `store`
+--
+
+DROP TABLE IF EXISTS `store`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `store` (
+  `store_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` char(10) NOT NULL,
+  `pwd` varchar(20) NOT NULL,
+  `store_name` varchar(50) NOT NULL,
+  `store_address` varchar(50) NOT NULL,
+  PRIMARY KEY (`store_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `store`
+--
+
+LOCK TABLES `store` WRITE;
+/*!40000 ALTER TABLE `store` DISABLE KEYS */;
+INSERT INTO `store` VALUES (1,'admin','1234','상호명','주소'),(2,'f1','1234','롯데리아','서울 동작구 장승배기로 171 IVY빌딩 1층'),(3,'f2','1234','맥도날드','서울 송파구 도곡로 434');
+/*!40000 ALTER TABLE `store` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user_list`
 --
 
@@ -56,7 +110,7 @@ CREATE TABLE `user_list` (
   `username` varchar(50) NOT NULL,
   `useraddress` varchar(50) NOT NULL,
   PRIMARY KEY (`useridx`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +119,7 @@ CREATE TABLE `user_list` (
 
 LOCK TABLES `user_list` WRITE;
 /*!40000 ALTER TABLE `user_list` DISABLE KEYS */;
-INSERT INTO `user_list` VALUES (1,'admin','1234','상호명','주소'),(2,'f1','1234','롯데리아','서울 동작구 장승배기로 171 IVY빌딩 1층'),(3,'f2','1234','맥도날드','서울 송파구 도곡로 434');
+INSERT INTO `user_list` VALUES (1,'admin','1234','상호명','주소'),(2,'f1','1234','롯데리아','서울 동작구 장승배기로 171 IVY빌딩 1층'),(3,'f2','1234','맥도날드','서울 송파구 도곡로 434'),(4,'admin','1234','상호명','주소'),(5,'f1','1234','롯데리아','서울 동작구 장승배기로 171 IVY빌딩 1층'),(6,'f2','1234','맥도날드','서울 송파구 도곡로 434');
 /*!40000 ALTER TABLE `user_list` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -78,4 +132,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-30 14:10:22
+-- Dump completed on 2016-06-30 15:47:39

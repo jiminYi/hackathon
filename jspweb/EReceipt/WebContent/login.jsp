@@ -73,7 +73,7 @@ function chk_blank() {
 <form name="login_form" method="post" action="login_do.jsp">
 <div class="form">
 <p>아이디</p><input type="text" name="id" placeholder="아이디" maxlength="10"><br>
-<p>비밀번호</p><input type="password" placeholder="비밀번호" name="pwd"><br>
+<p>비밀번호</p><input type="password" name="pwd" placeholder="비밀번호"><br>
 <br>
 <input type="submit" value="로그인" onclick="return chk_blank()">
 </div>

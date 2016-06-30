@@ -3,7 +3,7 @@
     pageEncoding="utf-8"%>
 <%
 
-String productidx = request.getParameter("productidx");
+String product_id = request.getParameter("product_id");
 
 request.setCharacterEncoding("utf-8");
 
@@ -15,11 +15,11 @@ try {
 
 	Connection con =  DriverManager.getConnection(DB_URL, "admin", "1234");
 	
-	String sql = "SELECT *FROM product_list WHERE productidx=?";
+	String sql = "SELECT *FROM product WHERE product_id=?";
 	
 	PreparedStatement pstmt = con.prepareStatement(sql);
 	
-	pstmt.setString(1, productidx);
+	pstmt.setString(1, product_id);
 
 	ResultSet rs = pstmt.executeQuery();
 	
@@ -71,16 +71,16 @@ try {
 <script>
 function chk_blank() {
 	
-	   if(document.modify_form.productname.value=="") {
+	   if(document.modify_form.product_name.value=="") {
 			alert("상품명을 입력하세요");	
 			return false;		
 		} 
 	   
-	   if(document.modify_form.productprice.value=="") {
+	   if(document.modify_form.product_price.value=="") {
 			alert("가격을 입력하세요");	
 			return false;	
 		} 
-	   if(document.modify_form.productcategory.value=="") {
+	   if(document.modify_form.product_category.value=="") {
 			alert("분류를 입력하세요");	
 			return false;	
 		} 
@@ -97,11 +97,11 @@ function chk_blank() {
 <div id="content" align="center">
 <h2>전자영수증 관리체계</h2>
 
-<form name="modify_form" method="post" action="product_modify_do.jsp?productidx=<%=productidx %>">
+<form name="modify_form" method="post" action="product_modify_do.jsp?product_id=<%=product_id %>">
 <div class="form">
-<p>상품명</p><input type="text" name="productname" value="<%=rs.getString("productname") %>" size="12"><br>
-<p>가격</p><input type="number" name="productprice" value="<%=rs.getString("productprice") %>" min="0" step="1"><br>
-<p>분류</p><input type="text" name="productcategory" value="<%=rs.getString("productcategory") %>" size="12"><br>
+<p>상품명</p><input type="text" name="product_name" value="<%=rs.getString("product_name") %>" size="12"><br>
+<p>가격</p><input type="number" name="product_price" value="<%=rs.getString("product_price") %>" min="0" step="1"><br>
+<p>분류</p><input type="text" name="product_category" value="<%=rs.getString("product_category") %>" size="12"><br>
 <br>
 <input type="submit" value="수정" onclick="return chk_blank()">
 </div>

@@ -8,11 +8,11 @@
 			return;
 	}
 
-	String useridx = (String)session.getAttribute("login.useridx");
+	String store_id = (String)session.getAttribute("login.store_id");
 	String id = (String)session.getAttribute("login.id");
 	String pwd = (String)session.getAttribute("login.pwd");
-	String username = (String)session.getAttribute("login.username");
-	String useraddress = (String)session.getAttribute("login.useraddress");
+	String store_name = (String)session.getAttribute("login.store_name");
+	String store_address = (String)session.getAttribute("login.store_address");
 
 %>
     
@@ -97,7 +97,7 @@
 
 					
 						<div class="login_box">
-							<label for="id" class="login_label">아이디</label>
+							<label for="login_id" class="login_label">아이디</label>
 							아이디: <%=id %>
 						</div>
 						<div class="login_box">
@@ -105,12 +105,12 @@
 							비밀번호: <%=pwd %>
 						</div>
 						<div class="login_box">
-							<label for="login_pwd" class="login_label">매장명</label>
-							매장명: <%=username %>
+							<label for="store_name" class="login_label">매장명</label>
+							매장명: <%=store_name %>
 						</div>
 						<div class="login_box">
-							<label for="login_pwd" class="login_label">주소</label>
-							주소: <%=useraddress %>
+							<label for="store_address" class="login_label">주소</label>
+							주소: <%=store_address %>
 						</div>						
 								
 						<form name="login_form" action="login.jsp">						

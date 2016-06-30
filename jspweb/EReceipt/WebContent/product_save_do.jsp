@@ -6,18 +6,18 @@
 
 request.setCharacterEncoding("utf-8");
 
-String useridx = request.getParameter("useridx");
-String productname = request.getParameter("productname");
-String productprice = request.getParameter("productprice");
-String productcategory = request.getParameter("productcategory");
+String store_id = request.getParameter("store_id");
+String product_name = request.getParameter("product_name");
+String product_price = request.getParameter("product_price");
+String product_category = request.getParameter("product_category");
 
 ProductList pl = new ProductList();
 
 
-pl.setUseridx(Integer.parseInt(useridx));
-pl.setProductname(productname);
-pl.setProductprice(Integer.parseInt(productprice));
-pl.setProductcategory(productcategory);
+pl.setStore_id(Integer.parseInt(store_id));
+pl.setProduct_name(product_name);
+pl.setProduct_price(Integer.parseInt(product_price));
+pl.setProduct_category(product_category);
 
 
 
@@ -28,14 +28,14 @@ try {
 
 	Connection con =  DriverManager.getConnection(DB_URL, "admin", "1234");
 	
-	String sql = "INSERT INTO product_list (useridx, productname, productprice, productcategory) VALUES(?,?,?,?)";
+	String sql = "INSERT INTO product (store_id, product_name, product_price, product_category) VALUES(?,?,?,?)";
 	
 	PreparedStatement pstmt = con.prepareStatement(sql);
 
-	pstmt.setInt(1, pl.getUseridx());
-	pstmt.setString(2, pl.getProductname());
-	pstmt.setInt(3, pl.getProductprice());
-	pstmt.setString(4, pl.getProductcategory());
+	pstmt.setInt(1, pl.getStore_id());
+	pstmt.setString(2, pl.getProduct_name());
+	pstmt.setInt(3, pl.getProduct_price());
+	pstmt.setString(4, pl.getProduct_category());
 
 	pstmt.executeUpdate();
 	

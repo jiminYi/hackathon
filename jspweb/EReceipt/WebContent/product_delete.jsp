@@ -4,7 +4,7 @@
 
 request.setCharacterEncoding("utf-8");
 
-String productidx = request.getParameter("productidx"); 
+String product_id = request.getParameter("product_id"); 
 
 try {
 
@@ -13,12 +13,12 @@ try {
 
 	Connection con =  DriverManager.getConnection(DB_URL, "admin", "1234"); 
 
-	String sql = "DELETE FROM product_list WHERE productidx=?";
+	String sql = "DELETE FROM product WHERE product_id=?";
 	
 	
 	PreparedStatement pstmt = con.prepareStatement(sql);
 	
-	pstmt.setInt(1, Integer.parseInt(productidx));
+	pstmt.setInt(1, Integer.parseInt(product_id));
 
 	pstmt.executeUpdate();
 
