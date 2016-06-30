@@ -1,0 +1,32 @@
+<%@page import="StoreDB.ProductList"%>
+<%@ page contentType="text/html;charset=utf-8" session="false" 
+			import="java.sql.*"%>
+<%
+
+	HttpSession session = request.getSession(false);
+	if(session == null) {
+		response.sendRedirect("login.jsp");
+			return;
+	}
+	String store_id = (String)session.getAttribute("login.store_id");
+
+request.setCharacterEncoding("utf-8");
+
+String[] product_id = request.getParameterValues("product_id");
+String[] amount = request.getParameterValues("amount");
+String card_company = request.getParameter("card_company");
+String card_number = request.getParameter("card_number");
+String purchase_date = request.getParameter("purchase_date");
+String nfc_id = request.getParameter("nfc_id");
+
+//ProductList pl = new ProductList();
+
+//pl.setStore_id(Integer.parseInt(store_id));
+
+
+
+%>
+<script>
+opener.location.reload(true);
+window.close();
+</script>

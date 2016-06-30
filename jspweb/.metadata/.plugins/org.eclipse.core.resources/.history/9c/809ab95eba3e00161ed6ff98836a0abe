@@ -1,0 +1,173 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" import="java.sql.*, java.util.*, java.text.*"
+    pageEncoding="utf-8"%>
+<%
+
+String[] product_id = request.getParameterValues("product_id");
+
+String[] amount = request.getParameterValues("amount");
+
+
+request.setCharacterEncoding("utf-8");
+
+try {
+	
+	String sql = null;
+	PreparedStatement pstmt = null;
+	ResultSet[] rs = new ResultSet[product_id.length];
+	
+	Class.forName("com.mysql.jdbc.Driver");  
+	String DB_URL ="jdbc:mysql://localhost:3306/ereceiptdb?useSSL=false";
+
+	Connection con =  DriverManager.getConnection(DB_URL, "admin", "1234");
+	
+	for(int i=0;i<product_id.length;i++) {
+		
+		sql = "SELECT *FROM product WHERE product_id=?";	
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, product_id[i]);
+		rs[i] = pstmt.executeQuery();
+		pstmt.clearParameters();
+	}
+
+	
+%> 
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>EReceipt</title>
+
+<style type="text/css">
+
+  html, body {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  position: absolute;
+  height: 100%;
+  min-width: 100%;
+  font-size: 13px;
+  color: #404040;
+  direction: ltr;
+  -webkit-text-size-adjust: none;
+  }
+
+#content {
+
+	top:  50px;
+	left: 20%;
+	width: 60%;
+	height: 500px;
+	background-color: gray;
+	display: inline-block;
+	position: fixed;
+}
+
+.form {
+	top: 60px;
+	position: relative;
+}
+
+
+</style>
+
+<script>
+function chk_blank() {
+	
+	   if(document.purchase_confirm_form.card_company.value=="") {
+			alert("카드사를 입력하세요");	
+			return false;		
+		} 
+	   
+	   if(document.purchase_confirm_form.card_number.value=="") {
+			alert("카드번호를 입력하세요");	
+			return false;		
+		} 
+	   if(document.purchase_confirm_form.nfc_id.value=="") {
+			alert("nfc를 테그하세요");	
+			return false;		
+		} 
+}
+
+</script>
+
+</head>
+<body>
+
+<div class="wrapper">
+
+
+<div id="content" align="center">
+<h2>전자영수증 관리체계</h2>
+
+<form name="purchase_confirm_form" method="post" action="product_purchase_do.jsp">
+
+							<table>
+							<%
+							SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy-MM-dd" );
+							Date currentTime = new Date();
+							String dTime = formatter.format(currentTime);
+							%>
+							<tr><td>거래일시: <%=dTime %></td><td></td></tr>
+							<%
+							int total = 0;
+   							for(int i=0;i<amount.length;i++) {
+   								while(rs[i].next()) {
+   								if(!amount[i].equals("")) {
+							%>
+							<tr>
+								<td>상품번호 :<%=product_id[i] %></td>
+								<td>상품명 :<%=rs[i].getString("product_name") %></td>
+								<td>단가 :<%=rs[i].getInt("product_price") %></td>
+								<td>수량 :<%=amount[i] %></td>
+								<td>금액:<%=Integer.parseInt(amount[i])*rs[i].getInt("product_price") %></td>
+								<td><input type="text" name="product_id" value="<%=product_id[i] %>" style="display: none; "></td>
+								<td><input type="number" name="amount" value="<%=amount[i] %>" style="display: none; "></td>
+							</tr>
+							<%
+								total += Integer.parseInt(amount[i])*rs[i].getInt("product_price");
+   									}
+   								}
+   							}
+							%>
+							<tr><td>합 계:<%=total %></td></tr>
+							</table>
+							<br><br>
+							<table>
+								<tr><td>카드사명:<input type="text" name="card_company"></td></tr>
+								<tr><td>카드번호:<input type="text" name="card_number"></td></tr>
+								<tr><td>NFC_id :<input type="text" name="nfc_id"></td></tr>
+								<tr><td><input type="submit" value="계산완료" onClick="return chk_blank()"></td></tr>
+							</table>
+
+</form>
+
+<%
+
+	for(int i=0;i<product_id.length;i++) {
+		rs[i].close();
+	}
+
+pstmt.close();
+con.close();
+
+}catch(SQLException e) {
+out.print(e);
+return;
+}
+
+%>
+
+
+</div>
+
+
+</div>
+
+
+</body>
+</html>

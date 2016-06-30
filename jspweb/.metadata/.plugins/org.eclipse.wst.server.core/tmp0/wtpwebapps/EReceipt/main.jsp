@@ -49,22 +49,22 @@
 					<img src="http://placehold.it/635x100" alt="배너">
 				</div>
 				<div class="news1">
-					<h3>연합뉴스 <span></span></h3>
-					<div>'50만원 바가지'…견인차 횡포 극성</div>
+					<h3>empty <span></span></h3>
+					<div>empty</div>
 					
 					<ul class="news2">
-						<li>네이버 뉴스</li>
-						<li><span>|</span> 연예</li>
-						<li><span>|</span>스포스</li>
-						<li><span>|</span>경제</li>
-						<li><span>|</span>오늘의 신문</li>
+						<li>empty</li>
+						<li><span>|</span>empty</li>
+						<li><span>|</span>empty</li>
+						<li><span>|</span>empty</li>
+						<li><span>|</span>empty</li>
 					</ul>
 				</div>
 				<div class="newslist">
 					<div class="news_tit">
-						<h2>뉴스 스탠드 <span></span></h2>
+						<h2>empty<span></span></h2>
 						<div>
-							<strong>전체 언론사</strong> <span>|</span> MY뉴스
+							<strong>empty</strong> <span>|</span> empty
 						</div>
 					</div>
 					<div class="newsCont">
@@ -83,8 +83,8 @@
 							<li><img src="http://placehold.it/81x73" alt="언론사 목록"></li>
 						</ul>
 						<div class="news_ft">
-							<span class="ico">구독설정</span> <span class="col_gr">|</span>
-							<span>[알림]언론사별 주요뉴스를 메인에서 바로 볼 수 있어요!</span>
+							<span class="ico">설정</span> <span class="col_gr">|</span>
+							<span>[알림]</span>
 						</div>
 					</div>
 				</div>
@@ -125,15 +125,13 @@
 					
 				</div>
 				<div class="today_box">
-					<h3>투데이 <span></span></h3>
+					<h3>empty <span></span></h3>
 					<div class="today_link">
-						<strong>10.13.</strong>(월)<span>|</span> TV편성
+						<strong>10.13.</strong>(월)<span>|</span> empty
 					</div>
 					<ul class="today_cont">
-						<li><strong>신문1면</strong><span></span>"5.24제재, 남북 만나 대화로 풀어야"</li>
-						<li><strong>학습</strong><span></span>영어로 듣는 뉴스 | 오늘의 글로벌 회화</li>
-						<li><strong>스포츠</strong><span></span>'4홈런' 세인트루이스, NLCS 2차전 승리</li>
-						<li><strong>증시</strong><span></span>코스닥 534.31</li>
+						<li><strong>empty</strong><span></span>empty</li>
+						<li><strong>empty</strong><span></span>empty</li>
 					</ul>
 				</div>
 				<div class="ad">

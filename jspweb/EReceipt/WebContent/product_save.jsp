@@ -124,7 +124,7 @@ function chk_blank() {
 								<td>분류 : <%=rs.getString("product_category") %></td>
 								<td><input type="button" value="삭제" onClick="location.href='product_delete.jsp?product_id=<%= rs.getInt("product_id")%>'"></td>
 								<td><input type="button" value="수정" onClick="window.open('product_modify.jsp?product_id=<%= rs.getInt("product_id")%>','_blank()',
-										'width=300,height=400,scrollbars=no,menubar=no,resizable=no')"></td>
+										'width=300,height=450,scrollbars=no,menubar=no,resizable=no')"></td>
 							</tr>
 							<%
    							}
@@ -142,8 +142,8 @@ function chk_blank() {
 							%>
 						
 						<div class="news_ft">
-							<span class="ico">구독설정</span> <span class="col_gr">|</span>
-							<span>[알림]언론사별 주요뉴스를 메인에서 바로 볼 수 있어요!</span>
+							<span class="ico">설정</span> <span class="col_gr">|</span>
+							<span>[알림]</span>
 						</div>
 					</div>
 				</div>
@@ -186,13 +186,13 @@ function chk_blank() {
 				<div class="today_box">
 					<h3>투데이 <span></span></h3>
 					<div class="today_link">
-						<strong>10.13.</strong>(월)<span>|</span> TV편성
+						<strong>10.13.</strong>(월)<span>|</span> empty
 					</div>
 					<ul class="today_cont">
-						<li><strong>신문1면</strong><span></span>"5.24제재, 남북 만나 대화로 풀어야"</li>
-						<li><strong>학습</strong><span></span>영어로 듣는 뉴스 | 오늘의 글로벌 회화</li>
-						<li><strong>스포츠</strong><span></span>'4홈런' 세인트루이스, NLCS 2차전 승리</li>
-						<li><strong>증시</strong><span></span>코스닥 534.31</li>
+						<li><strong>empty</strong><span></span>empty</li>
+						<li><strong>empty</strong><span></span>empty</li>
+						<li><strong>empty</strong><span></span>empty</li>
+						<li><strong>empty</strong><span></span>empty</li>
 					</ul>
 				</div>
 				<div class="ad">

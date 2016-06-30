@@ -47,26 +47,17 @@ try {
 
 <script>
 
-function chk_blank() {
+function purchase_chk() {
 	
-	   if(document.product_form.product_name.value=="") {
-			alert("상품명을 입력하세요");	
-			return false;
-			
-		} 
-	   
-	   if(document.product_form.product_price.value=="") {
-			alert("가격을 입력하세요");	
-			return false;
-			
-		} 
-	   
-	   if(document.product_form.product_category.value=="") {
-			alert("상품분류를 입력하세요");	
-			return false;
-			
-		} 
-	   
+	var gsWin = window.open("",'targetPage','_blank()',
+	'width=300,height=450,scrollbars=no,menubar=no,resizable=no');
+    var frm =document.purchase_form;
+    frm.target = 'targetPage'
+    frm.action = 'product_purchase_confirm.jsp';
+    frm.method = "post";
+    frm.submit();
+
+	
 }
 
 </script>
@@ -100,21 +91,14 @@ function chk_blank() {
 
 				<div class="newslist">
 					<div class="news_tit">
-						<h2 style="color:yellow;">신규품목 등록</h2><span></span>
+						<h2 style="color:yellow;">계산하기</h2><span></span>
 						<div>
-						<form name="product_form" action="product_save_do.jsp" method="get">
-							<strong>상품명</strong><input type="text" name="product_name" size="12"><span>|</span>
-							<strong>가격</strong><input type="number" name="product_price" min="0" step="1"><span>&#8361;|</span>
-							<strong>분류</strong><input type="text" name="product_category" size="12"><span>|</span>
-							<input type="text" name="useridx" value="<%=store_id %>" style="display: none; ">
-							
-							<input type="submit" value="등록" onclick="return chk_blank()">
-						</form>
+
 						
 						</div>
 					</div>
 					<div class="newsCont">
-						
+						<form name="purchase_form" action="" method="post">
 							<table>
 							<%
    							while(rs.next()) {
@@ -123,28 +107,21 @@ function chk_blank() {
 								<td>상품명 : <%=rs.getString("product_name") %></td>
 								<td>가격 : <%= rs.getInt("product_price")%></td>
 								<td>분류 : <%=rs.getString("product_category") %></td>
-								<td><input type="button" value="삭제" onClick="location.href='product_delete.jsp?product_id=<%= rs.getInt("product_id")%>'"></td>
-								<td><input type="button" value="수정" onClick="window.open('product_modify.jsp?product_id=<%= rs.getInt("product_id")%>','_blank()',
-										'width=300,height=400,scrollbars=no,menubar=no,resizable=no')"></td>
+								<td>수량 : <input type="number" name="amount" min="0" step="1"></td>
+								<td><input type="text" name="product_id" value="<%=rs.getString("product_id") %>" style="display: none; "></td>
 							</tr>
 							<%
    							}
 							%>
+							<tr>
+							<td><input type="submit" value="계산진행" onClick="purchase_chk()"></td>
+							</tr>
 							</table>
-							<%
-   							
-								rs.close();     
-    							stmt.close();     
-    							con.close(); 	
-									} catch (SQLException e) {
-     							 out.println("err:"+e.toString());
-      							return;
-								} 
-							%>
+						</form>
 						
 						<div class="news_ft">
-							<span class="ico">구독설정</span> <span class="col_gr">|</span>
-							<span>[알림]언론사별 주요뉴스를 메인에서 바로 볼 수 있어요!</span>
+							<span class="ico">설정</span> <span class="col_gr">|</span>
+							<span>[알림]</span>
 						</div>
 					</div>
 				</div>
@@ -185,15 +162,15 @@ function chk_blank() {
 					
 				</div>
 				<div class="today_box">
-					<h3>투데이 <span></span></h3>
+					<h3>empty <span></span></h3>
 					<div class="today_link">
-						<strong>10.13.</strong>(월)<span>|</span> TV편성
+						<strong>10.13.</strong>(월)<span>|</span> empty
 					</div>
 					<ul class="today_cont">
-						<li><strong>신문1면</strong><span></span>"5.24제재, 남북 만나 대화로 풀어야"</li>
-						<li><strong>학습</strong><span></span>영어로 듣는 뉴스 | 오늘의 글로벌 회화</li>
-						<li><strong>스포츠</strong><span></span>'4홈런' 세인트루이스, NLCS 2차전 승리</li>
-						<li><strong>증시</strong><span></span>코스닥 534.31</li>
+						<li><strong>empty</strong><span></span>empty</li>
+						<li><strong>empty</strong><span></span>empty</li>
+						<li><strong>empty</strong><span></span>empty</li>
+						<li><strong>empty</strong><span></span>empty</li>
 					</ul>
 				</div>
 				<div class="ad">
@@ -206,6 +183,16 @@ function chk_blank() {
 		 <div class="subcontents3"></div>
 	</div>
 	<footer></footer>
+							<%
+								rs.close();     
+    							stmt.close();     
+    							con.close(); 	
+									} catch (SQLException e) {
+     							 out.println("err:"+e.toString());
+      							return;
+								} 
+							%>
+
 
  </body>
 </html>

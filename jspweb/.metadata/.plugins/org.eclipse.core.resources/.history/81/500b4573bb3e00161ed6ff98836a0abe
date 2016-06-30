@@ -1,0 +1,59 @@
+<%@page import="StoreDB.ProductList"%>
+<%@ page contentType="text/html;charset=utf-8" session="false" 
+			import="java.sql.*"%>
+<%
+
+	HttpSession session = request.getSession(false);
+	if(session == null) {
+		response.sendRedirect("login.jsp");
+			return;
+	}
+	String store_id = (String)session.getAttribute("login.store_id");
+
+request.setCharacterEncoding("utf-8");
+
+String[] product_id = request.getParameterValues("product_id");
+String[] amount = request.getParameterValues("amount");
+String card_company = request.getParameter("card_company");
+String card_number = request.getParameter("card_number");
+String purchase_date = request.getParameter("purchase_date");
+String nfc_id = request.getParameter("nfc_id");
+
+ProductList pl = new ProductList();
+
+
+pl.setStore_id(Integer.parseInt(store_id));
+
+
+
+try {
+	
+	Class.forName("com.mysql.jdbc.Driver");  
+	String DB_URL ="jdbc:mysql://localhost:3306/ereceiptdb?useSSL=false";
+
+	Connection con =  DriverManager.getConnection(DB_URL, "admin", "1234");
+	
+	String sql = "INSERT INTO product (store_id, product_name, product_price, product_category) VALUES(?,?,?,?)";
+	
+	PreparedStatement pstmt = con.prepareStatement(sql);
+
+	pstmt.setInt(1, pl.getStore_id());
+	pstmt.setString(2, pl.getProduct_name());
+	pstmt.setInt(3, pl.getProduct_price());
+	pstmt.setString(4, pl.getProduct_category());
+
+	pstmt.executeUpdate();
+	
+	pstmt.close();
+	con.close();
+	
+}catch(SQLException e) {
+	out.print(e);
+	return;
+}
+
+%>
+<script>
+opener.location.reload(true);
+window.close();
+</script>
