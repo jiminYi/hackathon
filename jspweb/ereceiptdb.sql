@@ -16,6 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `item`
+--
+
+DROP TABLE IF EXISTS `item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `item` (
+  `item_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `receipt_id` int(11) NOT NULL,
+  PRIMARY KEY (`item_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `item`
+--
+
+LOCK TABLES `item` WRITE;
+/*!40000 ALTER TABLE `item` DISABLE KEYS */;
+INSERT INTO `item` VALUES (1,3,4,1002),(2,4,1,2003);
+/*!40000 ALTER TABLE `item` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `product`
 --
 
@@ -43,30 +69,54 @@ INSERT INTO `product` VALUES (1,2,'치즈버거',2300,'버거'),(2,2,'불고기�
 UNLOCK TABLES;
 
 --
--- Table structure for table `product_list`
+-- Table structure for table `receipt`
 --
 
-DROP TABLE IF EXISTS `product_list`;
+DROP TABLE IF EXISTS `receipt`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `product_list` (
-  `productidx` int(11) NOT NULL AUTO_INCREMENT,
-  `useridx` int(11) NOT NULL,
-  `productname` varchar(50) NOT NULL,
-  `productprice` int(11) NOT NULL,
-  `productcategory` varchar(50) NOT NULL,
-  PRIMARY KEY (`productidx`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+CREATE TABLE `receipt` (
+  `receipt_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `card_company` varchar(50) NOT NULL,
+  `card_number` int(11) NOT NULL,
+  `purchase_date` date NOT NULL,
+  PRIMARY KEY (`receipt_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `product_list`
+-- Dumping data for table `receipt`
 --
 
-LOCK TABLES `product_list` WRITE;
-/*!40000 ALTER TABLE `product_list` DISABLE KEYS */;
-INSERT INTO `product_list` VALUES (2,2,'치즈버거',2300,'버거'),(4,2,'불고기버거',3400,'버거'),(6,2,'새우버거',4500,'버거'),(7,3,'치즈버거',2700,'버거'),(8,3,'맥더블',3900,'버거');
-/*!40000 ALTER TABLE `product_list` ENABLE KEYS */;
+LOCK TABLES `receipt` WRITE;
+/*!40000 ALTER TABLE `receipt` DISABLE KEYS */;
+INSERT INTO `receipt` VALUES (1002,2,'농협은행',1234,'2016-06-30'),(2003,3,'신한카드',4321,'2016-06-30');
+/*!40000 ALTER TABLE `receipt` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `receipt_user`
+--
+
+DROP TABLE IF EXISTS `receipt_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `receipt_user` (
+  `receipt_id` int(11) DEFAULT NULL,
+  `nfc_id` varchar(50) NOT NULL,
+  UNIQUE KEY `receipt_id` (`receipt_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `receipt_user`
+--
+
+LOCK TABLES `receipt_user` WRITE;
+/*!40000 ALTER TABLE `receipt_user` DISABLE KEYS */;
+INSERT INTO `receipt_user` VALUES (1002,'7884'),(2003,'78844');
+/*!40000 ALTER TABLE `receipt_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -95,33 +145,6 @@ LOCK TABLES `store` WRITE;
 INSERT INTO `store` VALUES (1,'admin','1234','상호명','주소'),(2,'f1','1234','롯데리아','서울 동작구 장승배기로 171 IVY빌딩 1층'),(3,'f2','1234','맥도날드','서울 송파구 도곡로 434');
 /*!40000 ALTER TABLE `store` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `user_list`
---
-
-DROP TABLE IF EXISTS `user_list`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_list` (
-  `useridx` int(11) NOT NULL AUTO_INCREMENT,
-  `id` char(10) NOT NULL,
-  `pwd` varchar(20) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `useraddress` varchar(50) NOT NULL,
-  PRIMARY KEY (`useridx`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user_list`
---
-
-LOCK TABLES `user_list` WRITE;
-/*!40000 ALTER TABLE `user_list` DISABLE KEYS */;
-INSERT INTO `user_list` VALUES (1,'admin','1234','상호명','주소'),(2,'f1','1234','롯데리아','서울 동작구 장승배기로 171 IVY빌딩 1층'),(3,'f2','1234','맥도날드','서울 송파구 도곡로 434'),(4,'admin','1234','상호명','주소'),(5,'f1','1234','롯데리아','서울 동작구 장승배기로 171 IVY빌딩 1층'),(6,'f2','1234','맥도날드','서울 송파구 도곡로 434');
-/*!40000 ALTER TABLE `user_list` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -132,4 +155,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-30 15:47:39
+-- Dump completed on 2016-06-30 22:34:04
