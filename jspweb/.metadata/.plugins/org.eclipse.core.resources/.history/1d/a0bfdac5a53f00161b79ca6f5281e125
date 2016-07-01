@@ -1,0 +1,155 @@
+<%@ page contentType="text/html;charset=utf-8" session="false"
+			import="java.sql.*,org.json.simple.*"%>
+			
+<%
+
+request.setCharacterEncoding("utf-8");
+
+//String nfc_id = request.getParameter("nfc_id");
+String nfc_id = "2222";
+
+
+int numOfData = 0;
+
+int receipt_id = 0;
+int store_id =0;
+String card_company = null;
+int card_number =0;
+String purchase_date = null;
+String store_name = null;
+String store_address = null;
+
+try {
+	
+	PreparedStatement pstmt = null;
+	PreparedStatement pstmt2 = null;
+	PreparedStatement pstmt3 = null;
+	ResultSet rs = null;
+	ResultSet rs2 = null;
+	ResultSet rs3 = null;
+	
+	Class.forName("com.mysql.jdbc.Driver");  
+	String DB_URL ="jdbc:mysql://localhost/jaj7884";
+
+	Connection con =  DriverManager.getConnection(DB_URL, "jaj7884", "wkddj1960!");
+	
+	String sql = "SELECT COUNT(nfc_id) FROM receipt_user WHERE nfc_id=?";
+	
+	PreparedStatement ps = con.prepareStatement(sql);
+	ps.setString(1, nfc_id);
+	ResultSet result = ps.executeQuery();
+	if(result.next()) {
+		numOfData = result.getInt(1);
+	}
+	result.close();
+	ps.close();
+	
+	
+	sql = "SELECT *FROM receipt_user WHERE nfc_id=?";
+	
+	pstmt = con.prepareStatement(sql);
+	
+	pstmt.setString(1, nfc_id);
+
+	rs = pstmt.executeQuery();
+	
+	int[] rid = new int[numOfData];
+	int[] sid = new int[numOfData];
+	String[] ccompany = new String[numOfData];
+	int[] cnumber = new int[numOfData];
+	String[] pdate = new String[numOfData];
+	String[] sname = new String[numOfData];
+	String[] saddress = new String[numOfData];
+	
+	int count = 0;
+	while(rs.next()) {
+	receipt_id = rs.getInt("receipt_id");
+	rid[count] = rs.getInt("receipt_id");
+	count++;
+	}
+	
+	
+	sql = "SELECT *FROM receipt WHERE receipt_id=?";
+	
+	for(int i=0;i<numOfData;i++) {
+		
+		
+		pstmt2 = con.prepareStatement(sql);
+		pstmt2.setInt(1, rid[i]);
+		rs2 = pstmt2.executeQuery();
+		
+		if(rs2.next()){
+		
+		sid[i] = rs2.getInt("store_id");
+		ccompany[i] = rs2.getString("card_company");
+		cnumber[i] = rs2.getInt("card_number");
+		pdate[i] = rs2.getString("purchase_date");
+		
+		}
+		
+		pstmt2.clearParameters();
+		
+	}
+	
+	sql = "SELECT *FROM store WHERE store_id=?";
+		
+	for(int i=0;i<numOfData;i++) {
+		
+		pstmt3 = con.prepareStatement(sql);
+		pstmt3.setInt(1, sid[i]);
+		rs3 = pstmt3.executeQuery();
+		
+		if(rs3.next()) {
+		
+		sname[i] = rs3.getString("store_name");
+		saddress[i] = rs3.getString("store_address");
+		
+		}
+		pstmt3.clearParameters();
+		
+	}
+	
+	
+%>
+
+<%
+
+	JSONObject jsonMain = new JSONObject();
+	JSONArray jArray = new JSONArray();
+	
+	JSONObject jObject = new JSONObject();
+
+	for(int i=0;i<numOfData;i++) {
+	
+	jObject.put("receipt_id",rid[i]);
+	jObject.put("store_name",sname[i]);
+	jObject.put("store_addr",saddress[i]);
+	jObject.put("card_number",cnumber[i]);
+	jObject.put("card_company",ccompany[i]);
+	jObject.put("purchase_date",pdate[i]);
+
+	jArray.add(0,jObject);
+	
+	jsonMain.put("List",jArray.get(i));
+
+	
+	out.println(jsonMain.toJSONString());
+	
+	}
+	
+	rs.close();
+	pstmt.close();
+	rs2.close();
+	pstmt2.close();
+	rs3.close();
+	pstmt3.close();		
+	con.close();
+	
+	
+}catch(SQLException e) {
+	out.print(e);
+	return;
+}
+
+
+%>

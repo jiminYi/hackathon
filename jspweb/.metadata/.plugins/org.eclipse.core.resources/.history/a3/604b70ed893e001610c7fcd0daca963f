@@ -1,0 +1,94 @@
+<%@page import="StoreDB.StoreList"%>
+<%@ page contentType="text/html;charset=utf-8" session="false"
+			import="java.sql.*"%>
+			
+<%
+
+request.setCharacterEncoding("utf-8");
+
+
+String id = request.getParameter("id");
+String pwd = request.getParameter("pwd");
+
+StoreList user = new StoreList();
+
+user.setId(id);
+user.setPwd(pwd);
+
+
+try {
+	
+	
+	Class.forName("com.mysql.jdbc.Driver");  
+	String DB_URL ="jdbc:mysql://localhost:3306/ereceiptdb?useSSL=false";
+
+	Connection con =  DriverManager.getConnection(DB_URL, "admin", "1234");
+	
+	String sql = "SELECT *FROM user_list WHERE id=?";
+	
+	PreparedStatement pstmt = con.prepareStatement(sql);
+	
+	pstmt.setString(1, id);
+
+	ResultSet rs = pstmt.executeQuery();
+	
+	if(rs.next()) {
+		
+		if(pwd.equals(rs.getString("pwd"))) {
+					
+			request.setCharacterEncoding("utf-8");
+
+			HttpSession session = request.getSession(true);
+			
+			session.setAttribute("login.useridx", rs.getString("useridx"));
+			session.setAttribute("login.id", id);
+			session.setAttribute("login.pwd", pwd);
+			session.setAttribute("login.username", rs.getString("username"));
+			session.setAttribute("login.useraddress", rs.getString("useraddress"));
+			
+			rs.close();
+			pstmt.close();
+			con.close();
+			
+			response.sendRedirect("main.jsp");
+			
+		} else {
+			
+			rs.close();
+			pstmt.close();
+			con.close();
+			
+			%>	
+			 <script type="text/javascript">
+  			 	alert("비밀번호가 틀렸습니다");
+ 				history.go(-1);
+ 			 </script>
+			<%
+			
+		}
+		
+	} else {
+		
+		pstmt.close();
+		con.close();
+		
+		%>	
+		 <script type="text/javascript">
+			 	alert("존재하지 않는 계정입니다.");
+				history.go(-1);
+			 </script>
+		<%
+		
+	}
+	
+
+	pstmt.close();
+	con.close();
+	
+}catch(SQLException e) {
+	out.print(e);
+	return;
+}
+
+
+%>

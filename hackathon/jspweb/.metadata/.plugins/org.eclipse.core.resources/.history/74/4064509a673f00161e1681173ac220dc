@@ -1,0 +1,133 @@
+<%@page import="StoreDB.StoreList"%>
+<%@ page contentType="text/html;charset=utf-8" session="false"
+			import="java.sql.*"%>
+			
+<%
+
+request.setCharacterEncoding("utf-8");
+
+
+//String receipt_id = request.getParameter("receipt_id");
+String receipt_id = "2222";
+
+int numOfData = 0;
+
+int receipt_id = 0;
+int store_id =0;
+String card_company = null;
+int card_number =0;
+String purchase_date = null;
+String store_name = null;
+String store_address = null;
+
+try {
+	
+	PreparedStatement pstmt = null;
+	PreparedStatement pstmt2 = null;
+	PreparedStatement pstmt3 = null;
+	ResultSet rs = null;
+	ResultSet rs2 = null;
+	ResultSet rs3 = null;
+	
+	Class.forName("com.mysql.jdbc.Driver");  
+	String DB_URL ="jdbc:mysql://localhost/jaj7884";
+
+	Connection con =  DriverManager.getConnection(DB_URL, "jaj7884", "wkddj1960!");
+	
+	String sql = "SELECT COUNT(nfc_id) FROM receipt_user WHERE nfc_id=?";
+	
+	PreparedStatement ps = con.prepareStatement(sql);
+	ps.setString(1, nfc_id);
+	ResultSet result = ps.executeQuery();
+	if(result.next()) {
+		numOfData = result.getInt(1);
+	}
+	result.close();
+	ps.close();
+	
+	
+	sql = "SELECT *FROM receipt_user WHERE nfc_id=?";
+	
+	pstmt = con.prepareStatement(sql);
+	
+	pstmt.setString(1, nfc_id);
+
+	rs = pstmt.executeQuery();
+	
+	int[] rid = new int[numOfData];
+	
+	int count = 0;
+	while(rs.next()) {
+	receipt_id = rs.getInt("receipt_id");
+	rid[count] = rs.getInt("receipt_id");
+	count++;
+	}
+	
+	
+	sql = "SELECT *FROM receipt WHERE receipt_id=?";
+	
+	pstmt2 = con.prepareStatement(sql);
+	
+	pstmt2.setInt(1, receipt_id);
+
+	rs2 = pstmt2.executeQuery();
+	
+	if(rs2.next()) {
+	
+		store_id = rs2.getInt("store_id");
+		card_company = rs2.getString("card_company");
+		card_number = rs2.getInt("card_number");
+		purchase_date = rs2.getString("purchase_date");
+			
+		
+	sql = "SELECT *FROM store WHERE store_id=?";
+	
+	pstmt3 = con.prepareStatement(sql);
+	
+	pstmt3.setInt(1, store_id);
+
+	rs3 = pstmt3.executeQuery();
+	
+	if(rs3.next()) {
+		store_name = rs3.getString("store_name");
+		store_address = rs3.getString("store_address");
+	}
+	
+
+	
+		
+	}
+%>
+<html>
+<head></head>
+<body>
+<p><%=receipt_id %></p>
+<p><%=rid[0] %></p>
+<p><%=rid[1] %></p>
+<p><%=rid[2] %></p>
+<p><%=card_company %></p>
+<p><%=card_number %></p>
+<p><%=purchase_date %></p>
+<p><%=store_name %></p>
+<p><%=store_address %></p>
+</body>
+</html>
+
+<%
+	rs.close();
+	pstmt.close();
+	rs2.close();
+	pstmt2.close();
+	rs3.close();
+	pstmt3.close();		
+	con.close();
+	
+	
+	
+}catch(SQLException e) {
+	out.print(e);
+	return;
+}
+
+
+%>

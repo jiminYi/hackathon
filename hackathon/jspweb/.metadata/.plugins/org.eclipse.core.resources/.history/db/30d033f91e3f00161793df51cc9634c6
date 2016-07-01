@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>index</title>
+</head>
+<body>
+<script>location.replace("/home/hosting_users/jaj7884/www/login.jsp")</script>
+</body>
+</html>

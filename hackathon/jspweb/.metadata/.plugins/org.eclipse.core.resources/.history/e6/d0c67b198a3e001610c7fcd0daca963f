@@ -1,0 +1,38 @@
+package StoreDB;
+
+public class ProductList {
+	private int store_id;
+	private String product_name;
+	private int product_price;
+	private String product_category;
+	
+	public ProductList() {
+	}
+	
+	public void setStore_id(int store_id) {
+		this.store_id = store_id;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+	public void setProduct_price(int product_price) {
+		this.product_price = product_price;
+	}
+	public void setProductcategory(String productcate_gory) {
+		this.product_category = product_category;
+	}
+	
+	public int getUseridx() {
+		return useridx;
+	}
+	public String getProductname() {
+		return productname;
+	}
+	public int getProductprice() {
+		return productprice;
+	}
+	public String getProductcategory() {
+		return productcategory;
+	}
+
+}
