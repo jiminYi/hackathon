@@ -18,7 +18,7 @@
 <%
 Class.forName("com.mysql.jdbc.Driver");
 
-String DB_URL = "jdbc:mysql://localhost:3306/ereceiptdb?useSSL=false";
+String DB_URL = "jdbc:mysql://localhost/jaj7884";
 
 Connection con= null;
 Statement stmt = null;
@@ -26,7 +26,7 @@ ResultSet rs   = null;
 
 try {
     
-    con = DriverManager.getConnection(DB_URL, "admin", "1234"); 
+    con = DriverManager.getConnection(DB_URL, "jaj7884", "wkddj1960!"); 
 
     stmt = con.createStatement(); 
 

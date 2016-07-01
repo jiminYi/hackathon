@@ -20,17 +20,14 @@ String purchase_date = request.getParameter("purchase_date");
 String nfc_id = request.getParameter("nfc_id");
 
 int receipt_id = 0;
-//ProductList pl = new ProductList();
-
-//pl.setStore_id(Integer.parseInt(store_id));
 
 
 try {
 	
 	Class.forName("com.mysql.jdbc.Driver");  
-	String DB_URL ="jdbc:mysql://localhost:3306/ereceiptdb?useSSL=false";
+	String DB_URL ="jdbc:mysql://localhost/jaj7884";
 
-	Connection con =  DriverManager.getConnection(DB_URL, "admin", "1234");
+	Connection con =  DriverManager.getConnection(DB_URL, "jaj7884", "wkddj1960!");
 	
 	String sql = "SELECT COUNT(purchase_date) FROM receipt";
 	PreparedStatement pstmt = con.prepareStatement(sql);
@@ -58,6 +55,10 @@ try {
 		pstmt2.setInt(2, Integer.parseInt(amount[i]));
 		pstmt2.setInt(3, receipt_id);
 		
+		pstmt2.executeUpdate();
+		
+		pstmt2.clearParameters();
+		
 	}
 	
 	pstmt3.setInt(1, receipt_id);
@@ -65,7 +66,6 @@ try {
 	
 
 	pstmt1.executeUpdate();
-	pstmt2.executeUpdate();
 	pstmt3.executeUpdate();
 	
 	rs.close();

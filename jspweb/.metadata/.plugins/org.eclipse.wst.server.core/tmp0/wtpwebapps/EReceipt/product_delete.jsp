@@ -9,9 +9,9 @@ String product_id = request.getParameter("product_id");
 try {
 
 	Class.forName("com.mysql.jdbc.Driver");
-	String DB_URL ="jdbc:mysql://localhost:3306/ereceiptdb?useSSL=false";
+	String DB_URL ="jdbc:mysql://localhost/jaj7884";
 
-	Connection con =  DriverManager.getConnection(DB_URL, "admin", "1234"); 
+	Connection con =  DriverManager.getConnection(DB_URL, "jaj7884", "wkddj1960!"); 
 
 	String sql = "DELETE FROM product WHERE product_id=?";
 	

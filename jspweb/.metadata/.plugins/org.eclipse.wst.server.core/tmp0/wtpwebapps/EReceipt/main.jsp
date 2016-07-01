@@ -120,7 +120,7 @@
 
 						<div class="security">
 							<div class="security_txt">IP보안 <span class="security_on">ON</span></div>
-							<div class="dis_login_box"><a herf="#" class="dis_login"><span>일회용 로그인</span></a></div>
+							<div class="dis_login_box"><a href="#" class="dis_login"><span>일회용 로그인</span></a></div>
 						</div>
 					
 				</div>

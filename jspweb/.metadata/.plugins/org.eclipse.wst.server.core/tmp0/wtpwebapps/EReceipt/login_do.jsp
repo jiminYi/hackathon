@@ -10,19 +10,14 @@ request.setCharacterEncoding("utf-8");
 String id = request.getParameter("id");
 String pwd = request.getParameter("pwd");
 
-StoreList store = new StoreList();
-
-store.setId(id);
-store.setPwd(pwd);
-
 
 try {
 	
 	
 	Class.forName("com.mysql.jdbc.Driver");  
-	String DB_URL ="jdbc:mysql://localhost:3306/ereceiptdb?useSSL=false";
+	String DB_URL ="jdbc:mysql://localhost/jaj7884";
 
-	Connection con =  DriverManager.getConnection(DB_URL, "admin", "1234");
+	Connection con =  DriverManager.getConnection(DB_URL, "jaj7884", "wkddj1960!");
 	
 	String sql = "SELECT *FROM store WHERE id=?";
 	
