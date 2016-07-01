@@ -5,8 +5,8 @@
 
 request.setCharacterEncoding("utf-8");
 
-String nfc_id = request.getParameter("nfc_id");
-//String nfc_id = "2222";
+//String nfc_id = request.getParameter("nfc_id");
+String nfc_id = "2222";
 
 
 int numOfData = 0;
@@ -128,11 +128,10 @@ try {
 	jObject.put("card_company",ccompany[i]);
 	jObject.put("purchase_date",pdate[i]);
 
-	jArray.add(0,jObject);
+	jArray.add(0,jObject[i]);
 	
-	jsonMain.put("List",jArray.get(i));
+	jsonMain.put("List",jArray);
 
-	
 	out.println(jsonMain.toJSONString());
 	
 	}

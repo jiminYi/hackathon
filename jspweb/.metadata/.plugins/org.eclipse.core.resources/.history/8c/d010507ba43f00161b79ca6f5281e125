@@ -117,22 +117,21 @@ try {
 	JSONObject jsonMain = new JSONObject();
 	JSONArray jArray = new JSONArray();
 	
-	JSONObject jObject = new JSONObject();
+	JSONObject[] jObject1 = new JSONObject[numOfData];
 
 	for(int i=0;i<numOfData;i++) {
 	
-	jObject.put("receipt_id",rid[i]);
-	jObject.put("store_name",sname[i]);
-	jObject.put("store_addr",saddress[i]);
-	jObject.put("card_number",cnumber[i]);
-	jObject.put("card_company",ccompany[i]);
-	jObject.put("purchase_date",pdate[i]);
+	jObject[i].put("receipt_id",rid[i]);
+	jObject[i].put("store_name",sname[i]);
+	jObject[i].put("store_addr",saddress[i]);
+	jObject[i].put("card_number",cnumber[i]);
+	jObject[i].put("card_company",ccompany[i]);
+	jObject[i].put("purchase_date",pdate[i]);
 
-	jArray.add(0,jObject);
+	jArray.add(0,jObject[i]);
 	
-	jsonMain.put("List",jArray.get(i));
+	jsonMain.put("List",jArray);
 
-	
 	out.println(jsonMain.toJSONString());
 	
 	}

@@ -5,8 +5,8 @@
 
 request.setCharacterEncoding("utf-8");
 
-String nfc_id = request.getParameter("nfc_id");
-//String nfc_id = "2222";
+//String nfc_id = request.getParameter("nfc_id");
+String nfc_id = "2222";
 
 
 int numOfData = 0;
@@ -117,22 +117,21 @@ try {
 	JSONObject jsonMain = new JSONObject();
 	JSONArray jArray = new JSONArray();
 	
-	JSONObject jObject = new JSONObject();
+	JSONObject jObject1 = new JSONObject();
 
 	for(int i=0;i<numOfData;i++) {
 	
-	jObject.put("receipt_id",rid[i]);
-	jObject.put("store_name",sname[i]);
-	jObject.put("store_addr",saddress[i]);
-	jObject.put("card_number",cnumber[i]);
-	jObject.put("card_company",ccompany[i]);
-	jObject.put("purchase_date",pdate[i]);
+	jObject1.put("receipt_id",rid[i]);
+	jObject1.put("store_name",sname[i]);
+	jObject1.put("store_addr",saddress[i]);
+	jObject1.put("card_number",cnumber[i]);
+	jObject1.put("card_company",ccompany[i]);
+	jObject1.put("purchase_date",pdate[i]);
 
-	jArray.add(0,jObject);
+	jArray.add(0,jObject1);
 	
-	jsonMain.put("List",jArray.get(i));
+	jsonMain.put("List",jArray);
 
-	
 	out.println(jsonMain.toJSONString());
 	
 	}

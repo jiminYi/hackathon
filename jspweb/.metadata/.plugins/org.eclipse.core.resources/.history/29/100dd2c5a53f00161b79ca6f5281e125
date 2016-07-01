@@ -5,8 +5,9 @@
 
 request.setCharacterEncoding("utf-8");
 
-String receipt_id = request.getParameter("receipt_id");
-//String receipt_id = "3003";
+
+//String receipt_id = request.getParameter("receipt_id");
+String receipt_id = "3003";
 
 int numOfData = 0;
 

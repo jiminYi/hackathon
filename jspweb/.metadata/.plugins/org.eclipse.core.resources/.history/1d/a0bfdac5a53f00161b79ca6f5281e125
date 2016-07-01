@@ -5,8 +5,8 @@
 
 request.setCharacterEncoding("utf-8");
 
-String nfc_id = request.getParameter("nfc_id");
-//String nfc_id = "2222";
+//String nfc_id = request.getParameter("nfc_id");
+String nfc_id = "2222";
 
 
 int numOfData = 0;

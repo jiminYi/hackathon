@@ -5,6 +5,7 @@
 
 request.setCharacterEncoding("utf-8");
 
+
 String receipt_id = request.getParameter("receipt_id");
 //String receipt_id = "3003";
 
@@ -113,16 +114,16 @@ try {
 JSONObject jsonMain = new JSONObject();
 JSONArray jArray = new JSONArray();
 
-JSONObject jObject = new JSONObject();
+JSONObject jObject1 = new JSONObject();
 
 for(int i=0;i<numOfData;i++) {
 
-jObject.put("product_name",pname[i]);
-jObject.put("product_price",pprice[i]);
-jObject.put("product_category",pcategory[i]);
-jObject.put("product_amount",amt[i]);
+jObject1.put("product_name",pname[i]);
+jObject1.put("product_price",pprice[i]);
+jObject1.put("product_category",pcategory[i]);
+jObject1.put("product_amount",amt[i]);
 
-jArray.add(0,jObject);
+jArray.add(0,jObject1);
 
 jsonMain.put("List",jArray.get(i));
 
